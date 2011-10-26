@@ -1,0 +1,9 @@
+v0.0.2
+======
+ * Deploys to a machine with RedHat Enterprise Linux and the `tomcat6` package.
+
+v0.0.1
+======
+ * Initial release.
+ * Actually a broken pre-release version, whoops.
+
