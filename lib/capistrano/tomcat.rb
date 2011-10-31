@@ -10,6 +10,7 @@ configuration.load do
   _cset(:tomcat_https_port) { tomcat_base_port + 443 } #8443
   _cset :keystore_password, nil
   _cset :catalina_home, '/usr/share/tomcat6'
+  _cset(:tomcat_runtime_env, {})
 
   namespace :deploy do
     task :update_code, :roles => :app do
@@ -39,11 +40,12 @@ configuration.load do
     def run_tomcat_command cmd
       log = File.join(shared_path, "log", "deploy.log")
       tmpdir = File.join(current_path, "temp")
-      run "/usr/sbin/tomcat6 #{cmd} #{log}", :env => {
+      base_env = {
         "CATALINA_HOME" => catalina_home,
         "CATALINA_BASE" => current_path,
         "CATALINA_TMPDIR" => tmpdir
       }
+      run "/usr/sbin/tomcat6 #{cmd} #{log}", :env => base_env.merge(tomcat_runtime_env)
     end
   end
 
