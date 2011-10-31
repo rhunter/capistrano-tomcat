@@ -1,3 +1,8 @@
+v0.0.3
+======
+ * Allows a deployment to add additional environment variables to the
+   Tomcat runtime
+
 v0.0.2
 ======
  * Deploys to a machine with RedHat Enterprise Linux and the `tomcat6` package.
