@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Capistrano::Tomcat::VERSION
   s.authors     = ["Rob Hunter"]
   s.email       = ["rhunter@thoughtworks.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/rhunter/capistrano-tomcat"
   s.summary     = %q{Deployment recipes for deploying to Tomcat at OVE}
   s.description = %q{Apache Tomcat, a Java servlet container, runs WARs
 
