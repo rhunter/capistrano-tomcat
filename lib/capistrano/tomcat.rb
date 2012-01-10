@@ -10,6 +10,7 @@ configuration.load do
   _cset(:tomcat_https_port) { tomcat_base_port + 443 } #8443
   _cset :keystore_password, nil
   _cset :catalina_home, '/usr/share/tomcat6'
+  _cset :catalina_executable, '/usr/sbin/tomcat6'
   _cset(:tomcat_runtime_env, {})
 
   namespace :deploy do
@@ -45,7 +46,7 @@ configuration.load do
         "CATALINA_BASE" => current_path,
         "CATALINA_TMPDIR" => tmpdir
       }
-      run "/usr/sbin/tomcat6 #{cmd} #{log}", :env => base_env.merge(tomcat_runtime_env)
+      run "#{catalina_executable} #{cmd} #{log}", :env => base_env.merge(tomcat_runtime_env)
     end
   end
 

@@ -20,3 +20,4 @@ you can use the Capistrano deployment as you would for Passenger.
 * **tomcat\_ajp\_port**: defaults to tomcat_base_port + 4
 * **tomcat\_http\_port**: defaults to tomcat_base_port + 75
 * **tomcat\_https\_port**: defaults to tomcat_base_port + 443
+* **catalina_executable**: location of the Tomcat executable, defaults to /usr/sbin/tomcat6.  In a standard Tomcat installation this would be ${CATALINA_HOME}/bin/catalina.sh or ${CATALINA_HOME}/bin/catalina.bat
