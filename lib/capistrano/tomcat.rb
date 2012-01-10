@@ -7,7 +7,7 @@ configuration.load do
   _cset :tomcat_base_port, 8005
   _cset(:tomcat_ajp_port) { tomcat_base_port + 4 } #8009
   _cset(:tomcat_http_port) { tomcat_base_port + 75 } #8080
-  _cset(:tomcat_https_port) { tomcat_base_port + 443 } #8443
+  _cset(:tomcat_https_port) { tomcat_base_port + 438 } #8443
   _cset :keystore_password, nil
   _cset :catalina_home, '/usr/share/tomcat6'
   _cset :catalina_executable, '/usr/sbin/tomcat6'
