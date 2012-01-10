@@ -16,8 +16,7 @@ you can use the Capistrano deployment as you would for Passenger.
 
 ## Configuration
 
-`tomcat_base_port` controls the other ports as well.
-`tomcat_http_port`
-`tomcat_https_port`
-`tomcat_ajp_port`
-
+* **tomcat\_base\_port**: controls the other ports as well, defaults to 8005
+* **tomcat\_ajp\_port**: defaults to tomcat_base_port + 4
+* **tomcat\_http\_port**: defaults to tomcat_base_port + 75
+* **tomcat\_https\_port**: defaults to tomcat_base_port + 443
