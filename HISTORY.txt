@@ -1,3 +1,12 @@
+v0.0.4
+======
+ * Added targets for unpacking WARs
+ * More useful README
+ * Configurable `catalina_executable` for non-RedHat machines
+   (thanks Marc Huffnagle)
+ * HTTPS actually defaults to port 8443 like it was supposed to.
+   (thanks Marc Huffnagle)
+
 v0.0.3
 ======
  * Allows a deployment to add additional environment variables to the
