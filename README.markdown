@@ -28,3 +28,12 @@ servers and starts Tomcat on port 8080.
 ### Directories and files
 * `catalina_executable`: location of the Tomcat executable, defaults to `/usr/sbin/tomcat6`.  In a standard Tomcat installation this would be `${CATALINA_HOME}/bin/catalina.sh` or `${CATALINA_HOME}/bin/catalina.bat`
 
+### Unpacking the WAR
+
+Some tasks and applications rely on the standard Rails files being
+available on the filesystem. If you need to explode the WAR before
+Tomcat gets to it, you can include the following lines in your recipe:
+
+    after "deploy:update_code", "tomcat:unpack_war"
+    after "tomcat:unpack_war", "tomcat:finalize_unpacked_war"
+

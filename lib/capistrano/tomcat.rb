@@ -25,6 +25,7 @@ configuration.load do
 
     task :finalize_update do
       # no finalization necessary with a WAR deployment
+      # although it might be if you unpack the war with tomcat:unpack_war
     end
 
     task :start, :roles => :app do
@@ -75,6 +76,40 @@ configuration.load do
     template = File.read(template_filename)
     result = ERB.new(template).result(binding)
     put result, destination_path, :mode => 0644
+  end
+
+  namespace :tomcat do
+    desc "Unpack a WAR for tools that need the individual files"
+    task :unpack_war, :roles => [:app, :worker] do
+      target_webapps_path = File.join(release_path, 'webapps')
+      target_war_path = File.join(target_webapps_path, war_filename)
+      target_unpacked_war_path = unpacked_war_path_under release_path
+
+      on_rollback { run "rm -rf -- \"#{target_unpacked_war_path}\"" }
+      run %{unzip -q "#{target_war_path}" -d "#{target_unpacked_war_path}"}
+    end
+
+    desc "Touch up an unpacked WAR to look like a regular Rails app"
+    task :finalize_unpacked_war, :roles => [:app, :worker] do
+      unpacked_war_path = unpacked_war_path_under release_path
+      app_path = File.join unpacked_war_path, 'WEB-INF'
+      # code duplicated from capistrano's deploy recipe:
+      # (lib/capistrano/recipes/deploy.rb)
+      run <<-CMD
+      rm -rf #{app_path}/log #{app_path}/public/system #{app_path}/tmp/pids &&
+      mkdir -p #{app_path}/public &&
+      mkdir -p #{app_path}/tmp &&
+      ln -s #{shared_path}/log #{app_path}/log &&
+      ln -s #{shared_path}/system #{app_path}/public/system &&
+      ln -s #{shared_path}/pids #{app_path}/tmp/pids
+      CMD
+    end
+
+    def unpacked_war_path_under(release_path)
+      webapps_path = File.join(release_path, 'webapps')
+      war_path = File.join(webapps_path, war_filename)
+      unpacked_war_path = File.join(webapps_path, File.basename(war_filename, '.war'))
+    end
   end
 end
 
