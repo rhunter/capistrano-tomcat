@@ -26,7 +26,23 @@ servers and starts Tomcat on port 8080.
 * `tomcat_https_port`: defaults to 8443 (`tomcat_base_port` + 438)
 
 ### Directories and files
+* `catalina_home`: location of the base Tomcat installation, defaults to
+  `/usr/share/tomcat6`
 * `catalina_executable`: location of the Tomcat executable, defaults to `/usr/sbin/tomcat6`.  In a standard Tomcat installation this would be `${CATALINA_HOME}/bin/catalina.sh` or `${CATALINA_HOME}/bin/catalina.bat`
+
+For the Tomcat installed with **Red Hat Enterprise Linux** packages,
+the following settings are appropriate:
+
+    cset :catalina_home '/usr/share/tomcat6'
+    cset :catalina_executable, '/usr/sbin/tomcat6'
+
+### Additional pieces
+If you need Tomcat to run with additional environment variables, you can use the `tomcat_runtime_env` setting. For example:
+
+    cset :tomcat_runtime_env, {'MYAPP_DB_HOSTNAME' => 'db.example.com'}
+
+If you are using the Java keystore for SSL, you can set the password
+with `keystore_password`.
 
 ### Unpacking the WAR
 
