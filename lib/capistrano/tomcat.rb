@@ -14,7 +14,7 @@ configuration.load do
   _cset(:tomcat_runtime_env, {})
 
   namespace :deploy do
-    task :update_code, :roles => :app do
+    task :update_code, :roles => [:app, :worker] do
       on_rollback { run "rm -rf -- \"#{release_path}\"" }
 
       create_tomcat_directory_structure_under release_path
