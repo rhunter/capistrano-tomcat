@@ -1,3 +1,7 @@
+v0.0.6
+======
+ * Compatible with Bundler 1.1 (thanks Jennifer Smith)
+
 v0.0.5
 ======
  * Any servers with the 'worker' role will get a copy of the code, too.
